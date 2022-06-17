@@ -5,13 +5,13 @@ import java.text.DecimalFormat;
 public class Biglietto {
 
 		// Definisco gli attributi della classe
-		private int eta, km;
-		private double prezzoKm = 0.21, scontoUnder = 0.2, scontoOver = 0.4;
+		private int eta;
+		private double km, prezzoKm = 0.21;
 		
 		DecimalFormat df = new DecimalFormat("#.## €");
 
 		// Costruttori
-		public Biglietto(int eta, int km) {
+		public Biglietto(int eta, double km) {
 			super();
 			this.eta = eta;
 			this.km = km;
@@ -29,5 +29,33 @@ public class Biglietto {
 		}
 		
 		// Metodi
+		// Imposto il metodo per il calcolo del prezzo del biglietto
+		public double prezzoBiglietto() {
+			
+			double prezzoBiglietto;
+			prezzoBiglietto = km * prezzoKm;
+			if (eta<18) { 
+				double scontoUnder = 0.2;
+				double bigliettoUnder= prezzoBiglietto - (prezzoBiglietto * scontoUnder);
+				System.out.println("Hai diritto allo sconto del 20%");
+				return bigliettoUnder;
+			} else if (eta >=65) {
+				double scontoOver = 0.4;
+				double bigliettoOver = prezzoBiglietto - (prezzoBiglietto * scontoOver);
+				System.out.println("Hai diritto allo sconto del 40%");
+				return bigliettoOver;
+			} else {
+				return prezzoBiglietto;
+			}
+		}
 		
-}
+		// Imposto la stringa per restituire il prezzo formattato
+		public String prezzoFormattato() {
+			return df.format(prezzoBiglietto());
+		}
+		
+			
+			
+		}
+		
+
